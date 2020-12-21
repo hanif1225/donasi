@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" ng-app="app" ng-controller="isi">
+  <head>
+    <title>Form Donatur</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	    <link rel="stylesheet" href="isi/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="isi/fontawesome-free/css/all.min.css">
+	    <link rel="stylesheet" href="isi/bootstrap/tampilan_pendukung/style.css">
+      <link rel="stylesheet" href="isi/bootstrap/tampilan_pendukung/tampilan_tambahan.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="bg-dark">
+            <h5 class="text-white h4">Form Donatur</h5>
+          </div>
+      </nav>
+
+      <div class="container">
+      <form class="form">
+        <h4>Silahkan Isi</h4>
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" ng-model="dataisidonatur.nama" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>No Referensi</label>
+          <input type="text" ng-model="dataisidonatur.no_referensi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Akad Donasi</label>
+          <select ng-model="dataisidonatur.akad_donasi">
+            <option value="Zakat">Zakat</option>
+            <option value="Zakat Fitrah">Zakat Fitrah</option>
+            <option value="Wakaf">Wakaf</option>
+            <option value="Infak">Infak</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Tipe Transaksi</label>
+          <select ng-model="dataisidonatur.tipe_transaksi">
+            <option value="Transfer">Transfer</option>
+            <option value="Cash">Cash</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Jumlah Donasi</label>
+          <input type="text" ng-model="dataisidonatur.jumlah_donasi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Transfer Ke</label>
+          <input type="text" ng-model="dataisidonatur.transfer" class="form-control">
+        </div>
+      
+          <label>Masukkan Bukti Transfer</label>
+          <div class="form-group block">
+           
+            <label class="block">
+                <img src="{{dataisidonatur.gambar}}" style="width: 150px;height: 150px;border-radius: 10px">
+                <input type="file" ng-model="file" select-ng-files2 class="block" id="file" placeholder="Upload foto...">
+            </label>
+            <br>
+          </div>
+  
+
+        <!--
+        <div class="form-group block">
+            <label class="block">
+                <input type="file" ng-model="file" select-ng-files2 class="block" id="file" placeholder="Upload Bukti Pembayaran...">
+            </label>
+            <br>
+        </div>
+        -->
+      </form>
+      <button type="submit" class="btn btn-success" ng-click="saveIsidonatur()"  data-dismiss="modal">Simpan</button>
+    </div>
+    <br>
+
+<footer class="page-footer bg-dark md-5 ukfot" >
+  <div class="text-white"><center>Copyright Hejo Tech</center></div>
+</footer>
+
+<script src="isi/angular.js"></script>
+<script src="index.js"></script>
+<script src="isi/config.js"></script>
+<script src="isi/bootstrap/js/jquery.min.js"></script>
+<script src="isi/bootstrap/js/popper.js"></script>
+<script src="isi/bootstrap/js/bootstrap.min.js"></script>
+<script src="isi/bootstrap/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  </body>
+</html>
+        
+

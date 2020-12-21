@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en"  ng-app="app" ng-controller="isi">
+  <head>
+    <title>Dashboard</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="fontawesome-free/css/all.min.css">
+	    <link rel="stylesheet" href="bootstrap/tampilan_pendukung/style.css">
+      <link rel="stylesheet" href="bootstrap/tampilan_pendukung/tampilan_tambahan.css">
+  </head>
+  <body>		
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar" class="warna">
+      <div class="p-4 pt-5">
+        <a href="#" class="img logo rounded-circle mb-3" style="background-image: url(../images/a.jpg);"></a>
+          <ul class="list-unstyled components mb-5">
+            <li>
+              <a href="index.html"><i class="fas fa-user-alt"></i> Data Donatur</a>
+            </li>
+
+        <!--    
+          <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li>
+                    <a href="#">Page 1</a>
+                  </li>
+                  <li>
+                    <a href="#">Page 2</a>
+                  </li>
+                  <li>
+                    <a href="#">Page 3</a>
+                  </li>
+                </ul>
+            </li>  
+              -->
+          </ul>
+	  </div>
+    	  </nav>
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto ">
+                
+                <li class="nav-item active ">
+                    <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
+                </li>
+
+                <li class="nav-item active ">
+                    <a class="nav-link" href="#"><i class="fas fa-lightbulb"></i>About</a>
+                </li>
+        
+                 <li class="nav-item">
+                     <a class="nav-link disabled" style="color: white" href="#">Admin</a>
+                </li>
+
+                <li class="nav-item">    
+                     <button class="btn bg-white rounded-circle" id="dropdownMenuButton"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" disabled="">
+                         <i class="far fa-user"></i> <span class="caret"></span>
+                    </button>
+                    &ensp;
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger btn-sm mt-1" onclick="return confirm('Apakah anda ingin logout');" href="#">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Untuk Search -->
+        <form class="form-inline" >
+          <div class="form-group mx-sm-1 mb-1">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input ng-model="search" type="text" class="form-control" name="keyword"  placeholder="Masukkan Keyword">
+          
+          </div>
+            <button name="pencarian" ng-click="getIsidonatur()" type="submit" class="btn btn-primary mb-2">Cari Data</button>
+        </form>
+
+        <br>
+        <!-- Untuk Tambah Data -->
+        <div class="panel-heading">
+          <a href="#" class="btn btn-success float-left" data-toggle="modal" data-target="#add" ><i class="far fa-plus-square mr-2"></i>Tambah Data</a>    
+        </div>
+       
+<!--Isi data-->
+        <br>
+        <br>
+<table class="table table-dark mt-2">
+  <thead>
+      <tr>
+          <th scope="col">No</th>
+          <th scope="col">id</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Tanggal Transaksi</th>
+          <th scope="col">No Referensi</th>
+          <th scope="col">Akad Donasi</th>
+          <th scope="col">Tipe Transaksi</th>
+          <th scope="col">Jumlah Donasi</th>
+          <th scope="col">Transfer Ke</th>
+          <th scope="col">Bukti Pembayaran</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="c in isidonatur">
+          <td scope="row">{{$index+1}}</td>
+          <td>{{c.id_donatur}}</td>
+          <td>{{c.nama}}</td>
+          <td>{{c.tgl_transaksi | date:'dd-MM-yyyy'}}</td>
+          <td>{{c.no_referensi}}</td>
+          <td>{{c.akad_donasi}}</td>
+          <td>{{c.tipe_transaksi}}</td>
+          <td>{{c.jumlah_donasi}}</td>
+          <td>{{c.transfer}}</td>
+          <td><a href="{{c.gambar}}" target="_new"><img src="{{c.gambar}}" width="50"/></a></td>
+          <td>
+            <a ng-click="delete(c.id_donatur,c.gambar)" class='btn btn-danger btn-sm'  ><i class='fas fa-trash-alt'></i></a>
+            <br>
+            <a class='btn btn-success btn-sm' href="#" ng-click="editIsidonatur(c)" data-toggle="modal" data-target="#edit"><i class='fas fa-edit'></i></a>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+<!-- end data-->
+  </div>
+</div>
+
+<footer class="page-footer bg-dark md-5 ukfot" >
+  <div style="color: white;"><center>Copyright Hejo tech</center></div>
+</footer>
+
+<script src="angular.js"></script>
+<script src="index.js"></script>
+<script src="config.js"></script>
+
+<script src="bootstrap/js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+</html>
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+        <button type="button" class="close" id="closeadd" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <label>Upload Bukti Transaksi</label>
+          <center>
+            <div class="form-group block">
+              <label class="block">
+                  <img src="{{dataisidonatur.gambar}}" style="width: 150px;height: 150px;border-radius: 10px">
+                  <input type="file" ng-model="file" select-ng-files2 class="block" id="file" placeholder="Upload foto...">
+              </label>
+              <br>
+            </div>
+          </center>
+        
+        <div class="form-group">
+          <label>No Referensi</label>
+          <input type="text" ng-model="dataisidonatur.no_referensi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Akad Donasi</label>
+          <select ng-model="dataisidonatur.akad_donasi">
+            <option value="Zakat">Zakat</option>
+            <option value="Zakat Fitrah">Zakat Fitrah</option>
+            <option value="Wakaf">Wakaf</option>
+            <option value="Infak">Infak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" ng-model="dataisidonatur.nama" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>Tipe Transaksi</label>            
+          <select ng-model="dataisidonatur.tipe_transaksi">
+            <option value="Transfer">Transfer</option>
+            <option value="Cash">Cash</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Jumlah Donasi</label>
+          <input type="text" ng-model="dataisidonatur.jumlah_donasi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Transfer Ke</label>
+          <input type="text" alert="" ng-model="dataisidonatur.transfer" class="form-control">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success" ng-click="saveIsidonatur()"  data-dismiss="modal">Simpan</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Edit -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Inventaris</h5>
+        <button type="button" class="close" id="closeadd" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form">
+          <label>Upload Bukti Transaksi</label>
+          <center>
+            <div class="form-group block">
+              <label class="block">
+                  <img src="{{dataisidonatur.gambar}}" style="width: 150px;height: 150px;border-radius: 10px">
+                  <input type="file" ng-model="file" select-ng-files2 class="block" id="file" placeholder="Upload foto...">
+              </label>
+              <br>
+            </div>
+          </center>
+
+        <div class="form-group">
+          <label>Tanggal Transaksi</label>
+          <input type="date" ng-model="dataisidonatur.tgl_transaksi" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>No Referensi</label>
+          <input type="text" ng-model="dataisidonatur.no_referensi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Akad Donasi</label>
+          <select ng-model="dataisidonatur.akad_donasi">
+            <option value="Zakat">Zakat</option>
+            <option value="Zakat Fitrah">Zakat Fitrah</option>
+            <option value="Wakaf">Wakaf</option>
+            <option value="Infak">Infak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" ng-model="dataisidonatur.nama" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label>Tipe Transaksi</label>            
+          <select ng-model="dataisidonatur.tipe_transaksi">
+            <option value="Transfer">Transfer</option>
+            <option value="Cash">Cash</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Jumlah Donasi</label>
+          <input type="text" ng-model="dataisidonatur.jumlah_donasi" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Transfer Ke</label>
+          <input type="text" ng-model="dataisidonatur.transfer" class="form-control">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success" ng-click="saveIsidonatur()" >Simpan</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
